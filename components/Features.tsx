@@ -25,7 +25,7 @@ const Features = async () => {
         <section>
           <div className="home__cars-wrapper">
             {allCars?.map((car) => (
-              <CarCard car={car} />
+              <CarCard car={car} key={car.index} />
             ))}
           </div>
         </section>

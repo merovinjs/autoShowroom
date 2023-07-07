@@ -3,14 +3,14 @@ import { CarProps } from "@/types";
 import { calculateCarRent } from "@/utilty/db";
 import Image from "next/image";
 import React, { useState } from "react";
-import { CustomButton } from "./index";
+import { Cardetails, CustomButton } from "./index";
 
 interface CarCardProps {
   car: CarProps;
 }
 
 const CarCard = ({ car }: CarCardProps) => {
-  const [ısOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const { city_mpg, year, make, model, transmission, drive } = car;
   const carRent = calculateCarRent(city_mpg, year);
   return (
@@ -30,7 +30,7 @@ const CarCard = ({ car }: CarCardProps) => {
           alt="car model"
           fill
           priority
-          className="object-contain  "
+          className="object-contain"
           src="/hero.png"
         />
       </div>
@@ -67,6 +67,11 @@ const CarCard = ({ car }: CarCardProps) => {
           />
         </div>
       </div>
+      <Cardetails
+        isOpen={isOpen}
+        closeModal={() => setIsOpen(false)}
+        car={car}
+      />
     </div>
   );
 };

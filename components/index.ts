@@ -6,14 +6,14 @@ import Navbar from "./Navbar";
 import CarCard from "./CarCard";
 
 import SearchBar from "./SearchBar";
-import Cardetails from "./CarDetails";
+import CarDetails from "./CarDetails";
 
 import CustomFilter from "./CustomFilter";
 import SearchManufacturer from "./SearchManufacturer";
 export {
   Hero,
   CustomFilter,
-  Cardetails,
+  CarDetails,
   CustomButton,
   Footer,
   SearchBar,

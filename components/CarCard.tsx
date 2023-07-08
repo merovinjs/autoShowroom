@@ -1,25 +1,41 @@
 "use client";
 import { CarProps } from "@/types";
-import { calculateCarRent, getCuratedPhotos } from "@/utilty/db";
+import { calculateCarRent } from "@/utilty/db";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { Cardetails, CustomButton } from "./index";
+import { CarDetails, CustomButton } from "./index";
 
 interface CarCardProps {
   car: CarProps;
 }
+// async function getData(car: CarProps, angle?: string) {
+//   const { year, make, model, transmission, drive } = car;
+//   const query = `${make} ${model} ${transmission} ${drive} ${year}`;
+//   const res = await fetch(
+//     `https://api.pexels.com/v1/search?query=${query}&per_page=4&`,
+//     {
+//       headers: {
+//         Authorization:
+//           "IlzNSyzg1Ven2gRa5wcGtfHdVr7b9bPQzlkrO2N4UNoXuCt747JqVBUJ",
+//       },
+//     }
+//   );
+//   if (!res.ok) {
+//     throw new Error("Failed to fetch data");
+//   }
+//   const responseJson = await res.json();
+//   return responseJson.photos;
+// }
+
 const CarCard = ({ car }: CarCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [photoUrl, setPhotoUrl] = useState("");
+  const [photos1, setPhotos] = useState("");
+
   const { city_mpg, year, make, model, transmission, drive } = car;
-  useEffect(() => {
-    const fetchPhoto = async () => {
-      const photos = await getCuratedPhotos(car);
-      setPhotoUrl(photos[0].src.landscape);
-      console.log(photos);
-    };
-    fetchPhoto();
-  }, [car]);
+
+  // const photos = await getData(car);
+
+  // setPhotos(photos[0].src.large);
 
   const carRent = calculateCarRent(city_mpg, year);
   return (
@@ -40,7 +56,7 @@ const CarCard = ({ car }: CarCardProps) => {
           fill
           priority
           className="object-contain"
-          src={photoUrl}
+          src="/hero.png"
         />
       </div>
       <div className="relative flex w-full mt-2">
@@ -76,7 +92,7 @@ const CarCard = ({ car }: CarCardProps) => {
           />
         </div>
       </div>
-      <Cardetails
+      <CarDetails
         isOpen={isOpen}
         closeModal={() => setIsOpen(false)}
         car={car}

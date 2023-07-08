@@ -20,7 +20,7 @@ export const fetchCars = async () => {
   const options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": process.env.RAPID_API_KEY || "",
+      "X-RapidAPI-Key": "7b957d3774msh8f9ed67418c579ep149e46jsn1810983e1d54",
       "X-RapidAPI-Host": "cars-by-api-ninjas.p.rapidapi.com",
     },
   };
@@ -33,20 +33,19 @@ export const fetchCars = async () => {
     console.error(error);
   }
 };
-export const getCuratedPhotos = async (car: CarProps, angle?: string) => {
-  const { year, make, model, transmission, drive } = car;
-  const query = `${make} ${model} ${transmission} ${drive} ${year}`;
-  console.log(car);
-  const Apıkey = process.env.PEXELS_API_KEY || "";
-  const res = await fetch(
-    `https://api.pexels.com/v1/search?query=${query}&per_page=4&`,
-    {
-      mode: "no-cors",
-      headers: {
-        Authorization: Apıkey,
-      },
-    }
-  );
-  const responseJson = await res.json();
-  return responseJson.photos;
-};
+// export const getCuratedPhotos = async (car: CarProps, angle?: string) => {
+//   const { year, make, model, transmission, drive } = car;
+//   const query = `${make} ${model} ${transmission} ${drive} ${year}`;
+
+//   const res = await fetch(
+//     `https://api.pexels.com/v1/search?query=${query}&per_page=4&`,
+//     {
+//       headers: {
+//         Authorization:
+//           "IlzNSyzg1Ven2gRa5wcGtfHdVr7b9bPQzlkrO2N4UNoXuCt747JqVBUJ",
+//       },
+//     }
+//   );
+//   const responseJson = await res.json();
+//   return responseJson.photos;
+// };

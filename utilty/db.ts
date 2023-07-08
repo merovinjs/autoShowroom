@@ -1,3 +1,5 @@
+import { CarProps } from "@/types";
+
 export const calculateCarRent = (city_mpg: number, year: number) => {
   const basePricePerDay = 50; // Base rental price per day in dollars
   const mileageFactor = 0.1; // Additional rate per mile driven
@@ -31,23 +33,19 @@ export const fetchCars = async () => {
     console.error(error);
   }
 };
-<<<<<<< HEAD
-export const getCuratedPhotos = async (car: CarProps, angle?: string) => {
-  const { year, make, model, transmission, drive } = car;
-  const query = `${make} ${model} ${transmission} ${drive} ${year}`;
-  console.log(car);
-  const Apıkey = process.env.PEXELS_API_KEY || "";
-  const res = await fetch(
-    `https://api.pexels.com/v1/search?query=${query}&per_page=4&`,
-    {
-      mode: "no-cors",
-      headers: {
-        Authorization: Apıkey,
-      },
-    }
-  );
-  const responseJson = await res.json();
-  return responseJson.photos;
-};
-=======
->>>>>>> parent of 3faa3f3 (pexels photo api used)
+// export const getCuratedPhotos = async (car: CarProps, angle?: string) => {
+//   const { year, make, model, transmission, drive } = car;
+//   const query = `${make} ${model} ${transmission} ${drive} ${year}`;
+
+//   const res = await fetch(
+//     `https://api.pexels.com/v1/search?query=${query}&per_page=4&`,
+//     {
+//       headers: {
+//         Authorization:
+//           "IlzNSyzg1Ven2gRa5wcGtfHdVr7b9bPQzlkrO2N4UNoXuCt747JqVBUJ",
+//       },
+//     }
+//   );
+//   const responseJson = await res.json();
+//   return responseJson.photos;
+// };

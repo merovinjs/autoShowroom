@@ -41,6 +41,7 @@ export const getCuratedPhotos = async (car: CarProps, angle?: string) => {
   const res = await fetch(
     `https://api.pexels.com/v1/search?query=${query}&per_page=4&`,
     {
+      mode: "no-cors",
       headers: {
         Authorization: Apıkey,
       },

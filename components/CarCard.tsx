@@ -11,16 +11,11 @@ interface CarCardProps {
 const CarCard = ({ car }: CarCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [photoUrl, setPhotoUrl] = useState("");
-  const [photoUrl1, setPhotoUrl1] = useState("");
-  const [photoUrl2, setPhotoUrl2] = useState("");
   const { city_mpg, year, make, model, transmission, drive } = car;
   useEffect(() => {
     const fetchPhoto = async () => {
       const photos = await getCuratedPhotos(car);
       setPhotoUrl(photos[0].src.landscape);
-      setPhotoUrl1(photos[1].src.landscape);
-      setPhotoUrl2(photos[2].src.landscape);
-
       console.log(photos);
     };
     fetchPhoto();

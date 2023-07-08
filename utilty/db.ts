@@ -1,5 +1,3 @@
-import { CarProps } from "@/types";
-
 export const calculateCarRent = (city_mpg: number, year: number) => {
   const basePricePerDay = 50; // Base rental price per day in dollars
   const mileageFactor = 0.1; // Additional rate per mile driven
@@ -20,7 +18,7 @@ export const fetchCars = async () => {
   const options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": process.env.RAPID_API_KEY || "",
+      "X-RapidAPI-Key": "7b957d3774msh8f9ed67418c579ep149e46jsn1810983e1d54",
       "X-RapidAPI-Host": "cars-by-api-ninjas.p.rapidapi.com",
     },
   };
@@ -33,6 +31,7 @@ export const fetchCars = async () => {
     console.error(error);
   }
 };
+<<<<<<< HEAD
 export const getCuratedPhotos = async (car: CarProps, angle?: string) => {
   const { year, make, model, transmission, drive } = car;
   const query = `${make} ${model} ${transmission} ${drive} ${year}`;
@@ -50,3 +49,5 @@ export const getCuratedPhotos = async (car: CarProps, angle?: string) => {
   const responseJson = await res.json();
   return responseJson.photos;
 };
+=======
+>>>>>>> parent of 3faa3f3 (pexels photo api used)

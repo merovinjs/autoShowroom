@@ -1,10 +1,9 @@
 "use client";
 import { CarProps } from "@/types";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import Image from "next/image";
-import { getCuratedPhotos } from "@/utilty/db";
 interface CarDetailsProps {
   car: CarProps;
   isOpen: boolean;
@@ -12,23 +11,6 @@ interface CarDetailsProps {
 }
 
 const CarDetails = ({ car, isOpen, closeModal }: CarDetailsProps) => {
-  const [photoUrl, setPhotoUrl] = useState("");
-  const [photoUrl1, setPhotoUrl1] = useState("");
-  const [photoUrl2, setPhotoUrl2] = useState("");
-  const [photoUrl3, setPhotoUrl3] = useState("");
-
-  useEffect(() => {
-    const fetchPhoto = async () => {
-      const photos = await getCuratedPhotos(car);
-      setPhotoUrl(photos[0].src.landscape);
-      setPhotoUrl1(photos[1].src.landscape);
-      setPhotoUrl2(photos[2].src.landscape);
-      setPhotoUrl3(photos[3].src.landscape);
-
-      console.log(photos);
-    };
-    fetchPhoto();
-  }, [car]);
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -69,7 +51,13 @@ const CarDetails = ({ car, isOpen, closeModal }: CarDetailsProps) => {
                     </button>
                     <div className="flex-1 flex flex-col gap-3">
                       <div className="relative w-full h-40 bg-pattern bg-cover bg-center rounded-lg">
-                        <Image alt="car model" fill priority src={photoUrl} />
+                        <Image
+                          alt="car model"
+                          fill
+                          priority
+                          className="object-contain"
+                          src="/hero.png"
+                        />
                       </div>
                       <div className="flex gap-3">
                         <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
@@ -78,7 +66,7 @@ const CarDetails = ({ car, isOpen, closeModal }: CarDetailsProps) => {
                             fill
                             priority
                             className="object-contain"
-                            src={photoUrl1}
+                            src="/hero.png"
                           />
                         </div>
                         <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
@@ -87,7 +75,7 @@ const CarDetails = ({ car, isOpen, closeModal }: CarDetailsProps) => {
                             fill
                             priority
                             className="object-contain"
-                            src={photoUrl2}
+                            src="/hero.png"
                           />
                         </div>
                         <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
@@ -96,7 +84,7 @@ const CarDetails = ({ car, isOpen, closeModal }: CarDetailsProps) => {
                             fill
                             priority
                             className="object-contain"
-                            src={photoUrl3}
+                            src="/hero.png"
                           />
                         </div>
                       </div>

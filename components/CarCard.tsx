@@ -1,17 +1,31 @@
 "use client";
 import { CarProps } from "@/types";
-import { calculateCarRent } from "@/utilty/db";
+import { calculateCarRent, getCuratedPhotos } from "@/utilty/db";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Cardetails, CustomButton } from "./index";
 
 interface CarCardProps {
   car: CarProps;
 }
-
 const CarCard = ({ car }: CarCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [photoUrl, setPhotoUrl] = useState("");
+  const [photoUrl1, setPhotoUrl1] = useState("");
+  const [photoUrl2, setPhotoUrl2] = useState("");
   const { city_mpg, year, make, model, transmission, drive } = car;
+  useEffect(() => {
+    const fetchPhoto = async () => {
+      const photos = await getCuratedPhotos(car);
+      setPhotoUrl(photos[0].src.landscape);
+      setPhotoUrl1(photos[1].src.landscape);
+      setPhotoUrl2(photos[2].src.landscape);
+
+      console.log(photos);
+    };
+    fetchPhoto();
+  }, [car]);
+
   const carRent = calculateCarRent(city_mpg, year);
   return (
     <div className="car-card group">
@@ -31,7 +45,7 @@ const CarCard = ({ car }: CarCardProps) => {
           fill
           priority
           className="object-contain"
-          src="/hero.png"
+          src={photoUrl}
         />
       </div>
       <div className="relative flex w-full mt-2">

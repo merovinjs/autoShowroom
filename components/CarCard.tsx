@@ -1,6 +1,6 @@
 "use client";
 import { CarProps } from "@/types";
-import { calculateCarRent } from "@/utilty/db";
+import { calculateCarRent, getData } from "@/utilty/db";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { CarDetails, CustomButton } from "./index";
@@ -8,34 +8,21 @@ import { CarDetails, CustomButton } from "./index";
 interface CarCardProps {
   car: CarProps;
 }
-// async function getData(car: CarProps, angle?: string) {
-//   const { year, make, model, transmission, drive } = car;
-//   const query = `${make} ${model} ${transmission} ${drive} ${year}`;
-//   const res = await fetch(
-//     `https://api.pexels.com/v1/search?query=${query}&per_page=4&`,
-//     {
-//       headers: {
-//         Authorization:
-//           "IlzNSyzg1Ven2gRa5wcGtfHdVr7b9bPQzlkrO2N4UNoXuCt747JqVBUJ",
-//       },
-//     }
-//   );
-//   if (!res.ok) {
-//     throw new Error("Failed to fetch data");
-//   }
-//   const responseJson = await res.json();
-//   return responseJson.photos;
-// }
-
 const CarCard = ({ car }: CarCardProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [photos1, setPhotos] = useState("");
+  const [carImage, setCarImage] = useState("");
 
+  useEffect(() => {
+    const fetchCarImage = async () => {
+      const image = await getData(car);
+      const onlyImage = image[0].src.medium;
+
+      console.log(onlyImage);
+      setCarImage(onlyImage);
+    };
+    fetchCarImage();
+  }, [car]);
   const { city_mpg, year, make, model, transmission, drive } = car;
-
-  // const photos = await getData(car);
-
-  // setPhotos(photos[0].src.large);
 
   const carRent = calculateCarRent(city_mpg, year);
   return (
@@ -56,7 +43,7 @@ const CarCard = ({ car }: CarCardProps) => {
           fill
           priority
           className="object-contain"
-          src="/hero.png"
+          src={carImage}
         />
       </div>
       <div className="relative flex w-full mt-2">

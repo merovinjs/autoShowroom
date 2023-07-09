@@ -17,7 +17,6 @@ const CarCard = ({ car }: CarCardProps) => {
       const image = await getData(car);
       const onlyImage = image[0].src.medium;
 
-      console.log(onlyImage);
       setCarImage(onlyImage);
     };
     fetchCarImage();
@@ -37,15 +36,28 @@ const CarCard = ({ car }: CarCardProps) => {
         {carRent}
         <span className="self-end text-[14px] font-medium">/day</span>
       </p>
-      <div className="relative w-full h-40 my-3 object-contain">
-        <Image
-          alt="car model"
-          fill
-          priority
-          className="object-contain"
-          src={carImage}
-        />
-      </div>
+      {carImage ? (
+        <div className="relative w-full h-40 my-3 object-contain">
+          <Image
+            alt="car model"
+            fill
+            priority
+            className="object-contain"
+            src={carImage}
+          />
+        </div>
+      ) : (
+        <div className="relative w-full h-40 my-3 object-contain">
+          <Image
+            alt="car model"
+            fill
+            priority
+            className="object-contain"
+            src="/hero.png"
+          />
+        </div>
+      )}
+
       <div className="relative flex w-full mt-2">
         <div className="flex group-hover:invisible w-full justify-between text-gray">
           <div className="flex flex-col justify-center items-center gap-2">

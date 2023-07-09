@@ -1,9 +1,10 @@
 "use client";
 import { CarProps } from "@/types";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import Image from "next/image";
+import { getData } from "@/utilty/db";
 interface CarDetailsProps {
   car: CarProps;
   isOpen: boolean;
@@ -11,6 +12,26 @@ interface CarDetailsProps {
 }
 
 const CarDetails = ({ car, isOpen, closeModal }: CarDetailsProps) => {
+  const [imagehero, setHero] = useState("");
+  const [imageAlt1, setImage1] = useState("");
+  const [imageAlt2, setImage2] = useState("");
+  const [imageAlt3, setImage3] = useState("");
+
+  useEffect(() => {
+    const fetchCarImage = async () => {
+      const image = await getData(car);
+      const heroImage = image[0].src.medium;
+      const Image1 = image[1].src.medium;
+      const Image2 = image[2].src.medium;
+      const Image3 = image[3].src.medium;
+
+      setHero(heroImage);
+      setImage1(Image1);
+      setImage2(Image2);
+      setImage3(Image3);
+    };
+    fetchCarImage();
+  }, [car]);
   return (
     <>
       <Transition appear show={isOpen} as={Fragment}>
@@ -56,7 +77,7 @@ const CarDetails = ({ car, isOpen, closeModal }: CarDetailsProps) => {
                           fill
                           priority
                           className="object-contain"
-                          src="/hero.png"
+                          src={imagehero}
                         />
                       </div>
                       <div className="flex gap-3">
@@ -66,7 +87,7 @@ const CarDetails = ({ car, isOpen, closeModal }: CarDetailsProps) => {
                             fill
                             priority
                             className="object-contain"
-                            src="/hero.png"
+                            src={imageAlt1}
                           />
                         </div>
                         <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
@@ -75,7 +96,7 @@ const CarDetails = ({ car, isOpen, closeModal }: CarDetailsProps) => {
                             fill
                             priority
                             className="object-contain"
-                            src="/hero.png"
+                            src={imageAlt2}
                           />
                         </div>
                         <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
@@ -84,7 +105,7 @@ const CarDetails = ({ car, isOpen, closeModal }: CarDetailsProps) => {
                             fill
                             priority
                             className="object-contain"
-                            src="/hero.png"
+                            src={imageAlt3}
                           />
                         </div>
                       </div>

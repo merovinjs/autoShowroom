@@ -20,7 +20,7 @@ const SearchManufacturer = ({
             .includes(query.toLowerCase().replace(/\s+/g, ""))
         );
   return (
-    <div className="search-manifacturer">
+    <div className="search-manufacturer">
       <Combobox value={manifacturer} onChange={setManifacturer}>
         <div className="relative w-full">
           <Combobox.Button className="absolute top-[14px]">
@@ -35,7 +35,7 @@ const SearchManufacturer = ({
           <Combobox.Input
             className="search-manufacturer__input"
             placeholder="Volsvagen"
-            displayValue={(manufacturers: string) => manufacturers}
+            displayValue={(item: string) => item}
             onChange={(e) => setQuery(e.target.value)}
           />
           <Transition

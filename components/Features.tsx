@@ -2,8 +2,14 @@ import React from "react";
 import { CarCard, SearchBar } from "./index";
 import { CustomFilter } from "./index";
 import { fetchCars } from "@/utilty/db";
-const Features = async () => {
-  const allCars = await fetchCars();
+import { FilterProps, HomeProps } from "@/types";
+
+const Features = async ({ searchParams }: HomeProps) => {
+  const allCars = await fetchCars({
+    manufacturer: "audi",
+    limit: 10,
+    model: "a4",
+  });
 
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
 

@@ -15,11 +15,8 @@ export const calculateCarRent = (city_mpg: number, year: number) => {
   return rentalRatePerDay.toFixed(0);
 };
 
-export const fetchCars = async ({
-  limit,
-  model,
-  manufacturer,
-}: FilterProps) => {
+export async function fetchCars(filters: FilterProps) {
+  const { manufacturer, limit, model } = filters;
   const RapidAPI: string | undefined = process.env.RAPID_API_KEY || "";
   const url = `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?&make=${manufacturer}&model=${model}&limit=${limit}`;
   const options = {
@@ -37,7 +34,7 @@ export const fetchCars = async ({
   } catch (error) {
     console.error(error);
   }
-};
+}
 export const getData = async (car: CarProps, angle?: string) => {
   const PexelAPI: string | undefined = process.env.PEXELS_API_KEY || "";
   const { year, make, model, transmission, drive } = car;

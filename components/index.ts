@@ -1,5 +1,5 @@
 import Hero from "./Hero";
-import Features from "./Features";
+
 import CustomButton from "./CustomButton";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
@@ -18,7 +18,6 @@ export {
   Footer,
   SearchBar,
   Navbar,
-  Features,
   SearchManufacturer,
   CarCard,
 };

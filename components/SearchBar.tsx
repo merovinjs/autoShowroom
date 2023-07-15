@@ -36,6 +36,7 @@ export const updateSearcParams = (
   }
   const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
   router.push(newPathname);
+  router.replace(newPathname);
   return newPathname;
 };
 

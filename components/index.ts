@@ -3,6 +3,7 @@ import Hero from "./Hero";
 import CustomButton from "./CustomButton";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
+import ShowMore from "./ShowMore";
 import CarCard from "./CarCard";
 
 import SearchBar from "./SearchBar";
@@ -20,4 +21,5 @@ export {
   Navbar,
   SearchManufacturer,
   CarCard,
+  ShowMore,
 };
